@@ -1,4 +1,4 @@
-package com.luxi96.animationdemo;
+package com.luxi96.animationdemo.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+
+import com.luxi96.animationdemo.R;
 
 public class TweenFragment extends Fragment {
 

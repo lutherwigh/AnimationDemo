@@ -1,49 +1,64 @@
 package com.luxi96.animationdemo;
 
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
 
-public class MainActivity extends FragmentActivity implements View.OnClickListener{
+import com.luxi96.animationdemo.adapter.TabPagerAdapter;
+import com.luxi96.animationdemo.fragment.PropertyAnimationFragment;
+import com.luxi96.animationdemo.fragment.TweenFragment;
 
-    TextView v1,v2,v3,v4;
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
+public class MainActivity extends AppCompatActivity{
+
+    @BindView(R.id.main_pager)
+    ViewPager pager;
+    @BindView(R.id.main_tabs)
+    TabLayout tabs;
+
+    Unbinder unbinder;
+
+    List<Fragment> fragmentList;
+
+    TabPagerAdapter pagerAdapter;
+
+    String titles[] = {"Tween","Property"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        unbinder = ButterKnife.bind(this);
 
-        initView();
-    }
-
-    void initView(){
-        v1 = findViewById(R.id.v1);
-        v2 = findViewById(R.id.v2);
-        v3 = findViewById(R.id.v3);
-        v4 = findViewById(R.id.v4);
-        v1.setOnClickListener(this);
-        v2.setOnClickListener(this);
-        v3.setOnClickListener(this);
-        v4.setOnClickListener(this);
+        initPager();
     }
 
     @Override
-    public void onClick(View v) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        switch (v.getId()){
-            case R.id.v1:
-                transaction.replace(R.id.fragment_container,new TweenFragment());
-                break;
-            case R.id.v2:
-                break;
-            case R.id.v3:
-                break;
-            case R.id.v4:
-                break;
-        }
-        transaction.commit();
+    protected void onDestroy(){
+        super.onDestroy();
+        unbinder.unbind();
     }
+
+    void initPager(){
+        fragmentList = new ArrayList<>();
+        fragmentList.add(new TweenFragment());
+        fragmentList.add(new PropertyAnimationFragment());
+
+        pagerAdapter = new TabPagerAdapter(getSupportFragmentManager(),fragmentList,titles);
+        pager.setAdapter(pagerAdapter);
+        pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
+
+        tabs.setupWithViewPager(pager);
+    }
+
+
+
 }
