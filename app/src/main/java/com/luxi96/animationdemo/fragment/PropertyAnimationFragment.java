@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import com.luxi96.animationdemo.R;
 
+import butterknife.BindView;
+
 public class PropertyAnimationFragment extends BaseFragment {
 
 

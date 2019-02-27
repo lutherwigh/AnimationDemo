@@ -1,4 +1,4 @@
-package com.luxi96.animationdemo;
+package com.luxi96.animationdemo.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
