@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.luxi96.animationdemo.adapter.TabPagerAdapter;
 import com.luxi96.animationdemo.fragment.AdvancePropertyFragment;
+import com.luxi96.animationdemo.fragment.LabFragment;
 import com.luxi96.animationdemo.fragment.PropertyAnimationFragment;
 import com.luxi96.animationdemo.fragment.RxTestFragment;
 import com.luxi96.animationdemo.fragment.ScrollFragment;
@@ -34,9 +35,10 @@ public class MainActivity extends AppCompatActivity{
 
     TabPagerAdapter pagerAdapter;
 
-    String titles[] = {"Tween","Property","Advance Property","Rx测试","文字变换","Scroll和Recycler"};
+    String titles[] = {"Tween","Property","Advance Property","Rx测试","文字变换","Scroll和Recycler","实验功能"};
 
     // todo webview缓存
+    // todo 多fragment优化
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity{
         fragmentList.add(new RxTestFragment());
         fragmentList.add(new TextSwitchFragment());
         fragmentList.add(new ScrollFragment());
+        fragmentList.add(new LabFragment());
 
         pagerAdapter = new TabPagerAdapter(getSupportFragmentManager(),fragmentList,titles);
         pager.setAdapter(pagerAdapter);
